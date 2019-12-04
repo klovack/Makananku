@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Category {
-  static int totalNum = 0;
+  static int _totalCategoryCount = 0;
 
   final String id;
   final String title;
   final Color color;
 
-  Category({
+  const Category({
+    @required this.id,
     @required this.title,
     this.color = Colors.red,
-  }): this.id = 'makananku-category-$totalNum';
+  });
 }

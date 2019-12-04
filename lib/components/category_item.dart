@@ -22,7 +22,7 @@ class CategoryItem extends StatelessWidget {
     // ));
 
     // Push the page by name
-    Navigator.of(context).pushNamed('/category-meals',
+    Navigator.of(context)..pushNamed(CategoryMealsScreen.ROUTE_NAME,
       arguments: {
         'id': id,
         'title': title,

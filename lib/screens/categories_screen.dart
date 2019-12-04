@@ -6,7 +6,7 @@ import '../data/category_dummy.dart';
 class CategoriesScreen extends StatelessWidget {
   final String title;
   
-  CategoriesScreen({this.title});
+  CategoriesScreen({@required this.title});
   
   @override
   Widget build(BuildContext context) {
