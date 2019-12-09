@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:makananku/components/ingredients_checkbox.dart';
 
 import 'package:makananku/data/recipe_dummy.dart';
-import 'package:makananku/models/recipe.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
   static const ROUTE_NAME = "/recipe";
@@ -41,10 +41,10 @@ class RecipeDetailScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text(selectedRecipe.ingredients[index]),
+                        padding: EdgeInsets.all(2),
+                        child: IngredientCheckbox(
+                            selectedRecipe.ingredients[index], false),
                       ),
-
                       Divider(),
                     ],
                   ),
@@ -83,8 +83,8 @@ class RecipeDetailScreen extends StatelessWidget {
   Container _buildListCardWrapper(BuildContext context,
       {@required Widget child}) {
     return Container(
-      height: 200,
-      width: 300,
+      height: MediaQuery.of(context).size.height * 0.5,
+      width: MediaQuery.of(context).size.width * 0.8,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),

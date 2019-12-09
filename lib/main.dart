@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:makananku/screens/bottom_tabs_screen.dart';
 
+import './screens/tabs_screen.dart';
 import './screens/recipe_detail_screen.dart';
 import './screens/category_meals_screen.dart';
 import './screens/categories_screen.dart';
@@ -30,8 +32,15 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      home: CategoriesScreen(title: 'Makananku',),
 
+      // Top Tabs
+      // Uncomment/comment to see changes
+      // home: TabsScreen(),
+
+      // Bottom Tabs
+      // Uncomment/comment to see changes
+      home: BottomTabsScreen(),
+      
       // Routes
       routes: {
         CategoryMealsScreen.ROUTE_NAME: (ctx) => CategoryMealsScreen(),
