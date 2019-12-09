@@ -6,14 +6,22 @@ import '../models/recipe.dart';
 
 class RecipeItem extends StatelessWidget {
   final Recipe recipe;
+  final Function onRemoveItem;
 
-  RecipeItem(this.recipe);
+  RecipeItem(this.recipe,{this.onRemoveItem});
 
   void _selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(
+    Navigator.of(context)
+        .pushNamed(
       RecipeDetailScreen.ROUTE_NAME,
       arguments: this.recipe.id,
-    );
+    ).then((val) {
+      if (val != null && val == this.recipe.id) {
+        if (this.onRemoveItem != null) {
+          this.onRemoveItem(val);
+        }
+      }
+    });
   }
 
   @override
@@ -59,8 +67,11 @@ class RecipeItem extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Icon(Icons.insert_chart),
-                      SizedBox(width: 10,),
-                      Text('${Recipe.toStringERecipeComplexity(recipe.complexity)}')
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                          '${Recipe.toStringERecipeComplexity(recipe.complexity)}')
                     ],
                   ),
 

@@ -13,71 +13,81 @@ class RecipeDetailScreen extends StatelessWidget {
         DUMMY_RECIPES.firstWhere((recipe) => recipe.id == recipeId);
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(selectedRecipe.name),
+      appBar: AppBar(
+        title: Text(selectedRecipe.name),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            // Image Thumbnail
+            Container(
+              height: 300,
+              width: double.infinity,
+              child: Image.network(
+                selectedRecipe.imageURL,
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            // Title
+            _buildTitleContainer(context, 'Ingredients'),
+
+            // Ingredients
+            _buildListCardWrapper(
+              context,
+              child: ListView.builder(
+                itemCount: selectedRecipe.ingredients.length,
+                itemBuilder: (ctx, index) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(2),
+                      child: IngredientCheckbox(
+                          selectedRecipe.ingredients[index], false),
+                    ),
+                    Divider(),
+                  ],
+                ),
+              ),
+            ),
+
+            // Steps
+            _buildTitleContainer(context, 'Steps'),
+
+            _buildListCardWrapper(
+              context,
+              child: ListView.builder(
+                itemCount: selectedRecipe.steps.length,
+                itemBuilder: (ctx, index) => Column(
+                  children: <Widget>[
+                    ListTile(
+                      leading: CircleAvatar(
+                        child: Text('# ${index + 1}'),
+                      ),
+                      title: Text(selectedRecipe.steps[index]),
+                    ),
+                    Divider(),
+                  ],
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 20,
+            )
+          ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              // Image Thumbnail
-              Container(
-                height: 300,
-                width: double.infinity,
-                child: Image.network(
-                  selectedRecipe.imageURL,
-                  fit: BoxFit.cover,
-                ),
-              ),
+      ),
 
-              // Title
-              _buildTitleContainer(context, 'Ingredients'),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
 
-              // Ingredients
-              _buildListCardWrapper(
-                context,
-                child: ListView.builder(
-                  itemCount: selectedRecipe.ingredients.length,
-                  itemBuilder: (ctx, index) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(2),
-                        child: IngredientCheckbox(
-                            selectedRecipe.ingredients[index], false),
-                      ),
-                      Divider(),
-                    ],
-                  ),
-                ),
-              ),
-
-              // Steps
-              _buildTitleContainer(context, 'Steps'),
-
-              _buildListCardWrapper(
-                context,
-                child: ListView.builder(
-                  itemCount: selectedRecipe.steps.length,
-                  itemBuilder: (ctx, index) => Column(
-                    children: <Widget>[
-                      ListTile(
-                        leading: CircleAvatar(
-                          child: Text('# ${index + 1}'),
-                        ),
-                        title: Text(selectedRecipe.steps[index]),
-                      ),
-                      Divider(),
-                    ],
-                  ),
-                ),
-              ),
-
-              SizedBox(
-                height: 20,
-              )
-            ],
-          ),
-        ));
+        onPressed: () {
+          Navigator.of(context).pop(recipeId);
+        },
+      ),
+      
+    );
   }
 
   Container _buildListCardWrapper(BuildContext context,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makananku/screens/bottom_tabs_screen.dart';
+import 'package:makananku/screens/filters_screen.dart';
 
 import './screens/tabs_screen.dart';
 import './screens/recipe_detail_screen.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
       routes: {
         CategoryMealsScreen.ROUTE_NAME: (ctx) => CategoryMealsScreen(),
         RecipeDetailScreen.ROUTE_NAME: (ctx) => RecipeDetailScreen(),
+        FiltersScreen.ROUTE_NAME: (ctx) => FiltersScreen(),
       },
 
       // On Generate route handles unknown route
