@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:makananku/components/nav_drawer.dart';
+import 'package:makananku/models/recipe.dart';
 
 import 'package:makananku/screens/categories_screen.dart';
 import 'package:makananku/screens/favorites_screen.dart';
 
 class BottomTabsScreen extends StatefulWidget {
+  final List<Recipe> favoriteRecipes;
+
+  BottomTabsScreen({@required this.favoriteRecipes});
+
   @override
   _BottomTabsScreenState createState() => _BottomTabsScreenState();
 }
 
 class _BottomTabsScreenState extends State<BottomTabsScreen> {
-  final List<Map<String, Object>> _pages = [
-    {
-      'page': CategoriesScreen(title: 'Makananku'),
-      'title': 'Makananku',
-    },
-    {
-      'page': FavoritesScreen(),
-      'title': 'Kesukaanmu',
-    }
-  ];
+  List<Map<String, Object>> _pages;
 
   int _selectedPageIndex = 0;
+
+  @override
+  void initState() {
+    this._pages = [
+      {
+        'page': CategoriesScreen(title: 'Makananku'),
+        'title': 'Makananku',
+      },
+      {
+        'page': FavoritesScreen(widget.favoriteRecipes),
+        'title': 'Kesukaanmu',
+      }
+    ];
+    super.initState();
+  }
 
   void _selectPage(int index) {
     setState(() {

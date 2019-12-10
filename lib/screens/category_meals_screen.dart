@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:makananku/components/recipe_item.dart';
 import 'package:makananku/models/recipe.dart';
 
-import '../data/recipe_dummy.dart';
-
 /// Page for showing the recipes of each category
 class CategoryMealsScreen extends StatefulWidget {
   // RouteName to be accesible from the outside to prevent error
   static const ROUTE_NAME = '/category-meals';
+
+  final List<Recipe> availableRecipes;
+
+  CategoryMealsScreen(this.availableRecipes);
 
   @override
   _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
@@ -28,11 +30,12 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
     super.didChangeDependencies();
 
     if (!_firstLoaded) {
-      final routeArgs = ModalRoute.of(context).settings.arguments as Map<String, String>;
+      final routeArgs =
+          ModalRoute.of(context).settings.arguments as Map<String, String>;
 
       title = routeArgs['title'];
       final categoryId = routeArgs['id'];
-      categoryRecipes = DUMMY_RECIPES
+      categoryRecipes = widget.availableRecipes
           .where((recipe) => recipe.categories.contains(categoryId))
           .toList();
 
